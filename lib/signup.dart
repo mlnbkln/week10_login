@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:week10_login/login.dart';
+import 'package:week10_login/sharedPreferences.dart';
+
+
+var passwordController = TextEditingController();
+var userNameController = TextEditingController();
 
 class SignupPage extends StatefulWidget {
+  const SignupPage({Key? key}) : super(key: key);
+
   @override
+
   _SignupPageState createState() => _SignupPageState();
 }
 
+
 class _SignupPageState extends State<SignupPage> {
-  bool passwordVisible = false;
-  bool passwordConfrimationVisible = false;
-  void togglePassword() {
-    setState(() {
-      passwordVisible = !passwordVisible;
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
         appBar: AppBar(
-        title: Text("Sign up Page"),
+        title: const Text("Sign up Page"),
         ),
       body: SafeArea(
         child: Padding(
@@ -30,7 +34,7 @@ class _SignupPageState extends State<SignupPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-              SizedBox(
+              const SizedBox(
                 height: 48,
               ),
               Form(
@@ -41,13 +45,14 @@ class _SignupPageState extends State<SignupPage> {
                         borderRadius: BorderRadius.circular(14.0),
                       ),
                       child: TextFormField(
-                        decoration: InputDecoration(
+                          controller: userNameController,
+                          obscureText: false,
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Email',
-                        ),
-                      ),
+                          labelText: 'Username'),
+    ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 32,
                     ),
                     Container(
@@ -55,13 +60,14 @@ class _SignupPageState extends State<SignupPage> {
                         borderRadius: BorderRadius.circular(14.0),
                       ),
                       child: TextFormField(
-                        decoration: InputDecoration(
-                          labelText: 'Password',
+                        controller: passwordController,
+                        obscureText: false,
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
+                          labelText: 'Password'),
                         ),
-                      ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 32,
                     ),
                     Container(
@@ -69,35 +75,47 @@ class _SignupPageState extends State<SignupPage> {
                         borderRadius: BorderRadius.circular(14.0),
                       ),
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        controller: passwordController,
+                        obscureText: false,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
                           labelText: 'Password Confirmation',
-                          border: OutlineInputBorder(),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-                  SizedBox(
+                  const SizedBox(
                     height: 55,
                   ),
-                  Center(
-                  child: Container(
-                    height: 50,
-                    width: 250,
-                    decoration: BoxDecoration(
-                        color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-                  child: TextButton(
+          Center(
+            child: Container(
+              height: 50,
+              width: 250,
+              decoration: BoxDecoration(
+                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+              child:
+              ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
+                      setUsername(userNameController.text).then((bool committed) {
+                      });
+                      setPassword(passwordController.text).then((bool done) {
+                      });
+                      (passwordController.text);
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginPage(),
+                        ),
+                      );
+                      },
+                      child: const Text(
                       'Register',
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
                   ),
-                  ),
-                  ),
+            ),
+          ),
                 ],
               ),
             ],
@@ -107,3 +125,4 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 }
+

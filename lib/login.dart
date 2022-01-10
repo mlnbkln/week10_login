@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
-import 'signup.dart';
+import 'package:week10_login/signup.dart';
+
+import 'homepage.dart';
+
+var userNameInputController = TextEditingController();
+var passwordInputController = TextEditingController();
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Login Page"),
+        title: const Text("Login Page"),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -21,10 +31,11 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.only(left:15.0,right: 15.0,top:200.0,bottom: 0),
               // padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
-                decoration: InputDecoration(
+                controller: userNameInputController,
+                obscureText: false,
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Email',
-                    hintText: 'Enter valid email id as abc@gmail.com'),
+                    labelText: 'Username'),
               ),
             ),
             Padding(
@@ -32,8 +43,9 @@ class _LoginPageState extends State<LoginPage> {
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
+                controller: passwordInputController,
+                obscureText: false,
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Password',
                     hintText: 'Enter secure password'),
@@ -41,9 +53,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
             TextButton(
               onPressed: (){
-                //TODO FORGOT PASSWORD SCREEN GOES HERE
               },
-              child: Text(
+              child: const Text(
                 'Forgot Password',
                 style: TextStyle(color: Colors.blue, fontSize: 15),
               ),
@@ -53,28 +64,31 @@ class _LoginPageState extends State<LoginPage> {
               width: 250,
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-              child: TextButton(
+              child: ElevatedButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //  context, MaterialPageRoute(builder: (_) => HomePage()));
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                      builder: (BuildContext context) => HomePage(),
+                      ),
+                  );
                 },
-                child: Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 120,
-            ),
+                    child: const Text(
+                    'Login',
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  ),
+                  ),
+                  ),
+                  const SizedBox(
+                  height: 100,
+                  ),
 
-            TextButton(
-              onPressed: (){
-               Navigator.push(
-                 context, MaterialPageRoute(builder: (_) => SignupPage()));
-              },
-              child: Text('New User? Create Account',
-                style: TextStyle(color: Colors.red, fontSize: 15),
+                  TextButton(
+                  onPressed: (){
+                  Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => const SignupPage()));
+                  },
+                  child: const Text('New User? Create Account',
+                  style: TextStyle(color: Colors.red, fontSize: 15),
               ),
             ),
           ],
