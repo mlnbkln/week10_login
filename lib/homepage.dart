@@ -26,9 +26,6 @@ class HomePage extends StatelessWidget {
             ElevatedButton(
               child: const Text('Log out'),
               onPressed: () {
-                //getLoginValue().then(( String value) => print(value));
-                //getUsername().then(( String value) => print(value));
-                // getPassword().then(( String value) => print(value));
                 clearCache();
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
