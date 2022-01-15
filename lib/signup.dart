@@ -6,122 +6,103 @@ import 'package:week10_login/sharedPreferences.dart';
 var passwordController = TextEditingController();
 var userNameController = TextEditingController();
 
-class SignupPage extends StatefulWidget {
+
+class SignupPage extends StatelessWidget {
   const SignupPage({Key? key}) : super(key: key);
 
   @override
-
-  _SignupPageState createState() => _SignupPageState();
-}
-
-
-class _SignupPageState extends State<SignupPage> {
-
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-        title: const Text("Sign up Page"),
-        ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left:15.0,right: 15.0,top:50.0,bottom: 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-              const SizedBox(
-                height: 48,
+    return Center(
+      child: SingleChildScrollView (
+        child: Column(
+
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: TextFormField(
+                controller: userNameController,
+                obscureText: false,
+                decoration: InputDecoration(
+                    labelText: 'Username',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8.0),
+                        )),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20)),
               ),
-              Form(
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14.0),
-                      ),
-                      child: TextFormField(
-                          controller: userNameController,
-                          obscureText: false,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Username'),
-    ),
-                    ),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14.0),
-                      ),
-                      child: TextFormField(
-                        controller: passwordController,
-                        obscureText: false,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Password'),
-                        ),
-                    ),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14.0),
-                      ),
-                      child: TextFormField(
-                        controller: passwordController,
-                        obscureText: false,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Password Confirmation',
-                        ),
-                      ),
-                    ),
-                  ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: TextField(
+                controller: passwordController,
+                obscureText: false,
+                decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8.0),
+                        )),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20)),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: TextField(
+                controller: passwordController,
+                obscureText: false,
+                decoration: InputDecoration(
+                    labelText: 'Password Confirmation',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8.0),
+                        )),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20)),
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            GestureDetector(
+              onTap: (){
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => LoginPage(),
+                  ),
+                );
+              },
+              child: Container(
+                child: Text(
+                  'Already registered?',
+                  style: TextStyle(
+                    color: Colors.blue,
+                  ),
                 ),
               ),
-                  const SizedBox(
-                    height: 55,
-                  ),
-          Center(
-            child: Container(
-              height: 50,
-              width: 250,
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-              child:
-              ElevatedButton(
-                    onPressed: () {
-                      setUsername(userNameController.text).then((bool committed) {
-                      });
-                      setPassword(passwordController.text).then((bool done) {
-                      });
-                      (passwordController.text);
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => const LoginPage(),
-                        ),
-                      );
-                      },
-                      child: const Text(
-                      'Register',
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                  ),
             ),
-          ),
-                ],
-              ),
-            ],
-          ),
-    ),
-    )
+            SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setUsername(userNameController.text).then((bool committed) {
+
+                });
+                setPassword(passwordController.text).then((bool done) {
+
+                });
+               (passwordController.text);
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => LoginPage(),
+                  ),
+                );
+              },
+              child: Text('Signup'),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
